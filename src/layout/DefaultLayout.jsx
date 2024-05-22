@@ -5,14 +5,30 @@ import styled from "styled-components";
 export default function DefaultLayout() {
   const Wrap = styled.div`
     max-width: 100%;
-    background-color: #f5f5f5;
-    min-height: 100vh;
+    background-color: #f7f7f9;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @font-face {
+      font-family: "Pretendard-Regular";
+      src: url("/assets/fonts/Pretendard-Regular.woff") format("woff");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    * {
+      font-family: "Pretendard-Regular";
+    }
   `;
+
   const InnerWrap = styled.div`
-    max-width: 1200px;
-    min-width: 800px;
-    padding: 0 5%;
-    margin: 0 auto;
+    width: 80%;
+    min-width: 1100px;
+    height: 85%;
+    min-height: 700px;
+    background-color: #fff;
   `;
 
   return (
