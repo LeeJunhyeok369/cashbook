@@ -2,6 +2,28 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "./Input";
 
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 10%;
+  /* margin-top: 2rem; */
+
+  > button#save {
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    background-color: #5383e8;
+    color: #fff;
+    border: 0;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    font-size: 1.05rem;
+  }
+`;
+
 export default function InputForm() {
   const [formData, setFormData] = useState({
     date: "",
@@ -10,34 +32,14 @@ export default function InputForm() {
     description: "",
   });
 
-  const InputForm = styled.form`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 10%;
-    /* margin-top: 2rem; */
-
-    > button {
-      width: 100%;
-      text-align: center;
-      height: 45px;
-      line-height: 45px;
-      background-color: #5383e8;
-      color: #fff;
-      border: 0;
-      border-radius: 1rem;
-      margin-top: 1rem;
-    }
-  `;
-
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(e.target, value);
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
-    <InputForm>
+    <Form>
       <Input
         label="날짜"
         value={formData.date}
@@ -47,7 +49,6 @@ export default function InputForm() {
       />
       <Input
         label="항목"
-        type="number"
         value={formData.item}
         onChange={handleChange}
         placeholder="지출 항목"
@@ -55,6 +56,7 @@ export default function InputForm() {
       />
       <Input
         label="금액"
+        type="number"
         value={formData.amount}
         onChange={handleChange}
         placeholder="지출 금액"
@@ -67,7 +69,9 @@ export default function InputForm() {
         placeholder="지출 내용"
         name="description"
       />
-      <button type="submit">저장</button>
-    </InputForm>
+      <button id="save" type="submit">
+        저장
+      </button>
+    </Form>
   );
 }
