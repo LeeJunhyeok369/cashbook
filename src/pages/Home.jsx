@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import DateSelect from "../components/DateSelect";
-import InputForm from "../components/InputForm";
-import MonthHistory from "../components/MonthHistory";
+import LeftForm from "./../components/LeftForm";
+import RightList from "./../components/RightList";
 
 const Flex = styled.div`
   display: flex;
@@ -10,40 +9,26 @@ const Flex = styled.div`
   width: 100%;
 `;
 
-const LeftMenu = styled.div`
-  width: 30%;
-  height: 100%;
-  background-color: #d5e3ff;
+const InnerWrap = styled.div`
+  width: 80%;
+  min-width: 1100px;
+  height: 85%;
+  min-height: 700px;
+  background-color: #fff;
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 `;
-const RigthList = styled.div`
-  width: 70%;
-  height: 100%;
-  background-color: #f7f7f9;
-  overflow: hidden;
-`;
-const Title = styled.h1`
-  height: 25%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.3rem;
-  text-align: center;
-  line-height: 3rem;
-  padding: 0 10%;
-  font-weight: bold;
-  word-break: keep-all;
-`;
-export default function Home() {
+
+export default function Home({ fakeData }) {
+  console.log(fakeData);
+
   return (
-    <Flex>
-      <LeftMenu>
-        <Title>개인 지출 관리 애플리케이션</Title>
-        <InputForm />
-      </LeftMenu>
-      <RigthList>
-        <DateSelect />
-        <MonthHistory />
-      </RigthList>
-    </Flex>
+    <InnerWrap>
+      <Flex>
+        <LeftForm />
+        <RightList />
+      </Flex>
+    </InnerWrap>
   );
 }

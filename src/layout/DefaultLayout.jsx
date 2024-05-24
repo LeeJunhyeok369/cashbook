@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 export default function DefaultLayout() {
+  const fakeData = useState([]);
+
   const Wrap = styled.div`
     max-width: 100%;
     background-color: #fff;
@@ -29,22 +31,9 @@ export default function DefaultLayout() {
     }
   `;
 
-  const InnerWrap = styled.div`
-    width: 80%;
-    min-width: 1100px;
-    height: 85%;
-    min-height: 700px;
-    background-color: #fff;
-    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  `;
-
   return (
     <Wrap>
-      <InnerWrap>
-        <Outlet />
-      </InnerWrap>
+      <Outlet fakeData={fakeData} />
     </Wrap>
   );
 }
