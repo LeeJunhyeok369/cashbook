@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 import Input from "./Input";
 
 const Form = styled.form`
@@ -24,8 +25,9 @@ const Form = styled.form`
   }
 `;
 
-export default function InputForm() {
+export default function InputForm({ setFakeData }) {
   const [formData, setFormData] = useState({
+    id: uuidv4(),
     date: "",
     item: "",
     amount: "",
@@ -38,8 +40,13 @@ export default function InputForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFakeData((prev) => [...prev, formData]);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Input
         label="날짜"
         value={formData.date}

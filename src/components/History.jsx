@@ -35,10 +35,14 @@ const StyleHistory = styled.div`
 `;
 
 export default function History({ id, date, item, amount, description }) {
+  const dateArr = date.split("-");
+
   return (
     <StyleHistory id={id}>
       <div>
-        <span>{date}</span>
+        <span>
+          {dateArr[0]}년 {dateArr[1]}월 {dateArr[2]}일
+        </span>
         <p>
           {item} - {description}
         </p>

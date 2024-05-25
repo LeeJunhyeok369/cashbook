@@ -17,6 +17,17 @@ const StlyeMonthBtn = styled.div`
     background-color: #5383e8;
   }
 `;
-export default function MonthBtn({ Month }) {
-  return <StlyeMonthBtn>{Month}월</StlyeMonthBtn>;
+export default function MonthBtn({ nowMonth, setNowMonth, Month }) {
+  const handleNowMonth = () => {
+    setNowMonth(Month);
+  };
+
+  return (
+    <StlyeMonthBtn
+      style={nowMonth == Month ? { backgroundColor: "#5383e8" } : {}}
+      onClick={handleNowMonth}
+    >
+      {Month}월
+    </StlyeMonthBtn>
+  );
 }

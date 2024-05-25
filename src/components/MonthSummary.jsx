@@ -18,10 +18,13 @@ const Summary = styled.div`
   }
 `;
 
-export default function MonthSummary() {
+export default function MonthSummary({ nowFakeData, nowMonth }) {
   return (
     <Summary>
-      <h3>10월 총 지출: 0원</h3>
+      <h3>
+        {nowMonth}월 총 지출:{" "}
+        {nowFakeData.reduce((acc, cur) => acc + cur.amount, 0)}원
+      </h3>
       <HistoryBar />
     </Summary>
   );

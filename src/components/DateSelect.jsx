@@ -10,23 +10,19 @@ const MonthMenus = styled.div`
   flex-wrap: wrap;
 `;
 
-export default function DateSelect() {
-  // const MonthMenu = useMemo();
+export default function DateSelect({ nowMonth, setNowMonth }) {
+  const months = Array.from({ length: 12 }, (_, index) => index + 1);
 
   return (
     <MonthMenus>
-      <MonthBtn Month={1} />
-      <MonthBtn Month={2} />
-      <MonthBtn Month={3} />
-      <MonthBtn Month={4} />
-      <MonthBtn Month={5} />
-      <MonthBtn Month={6} />
-      <MonthBtn Month={7} />
-      <MonthBtn Month={8} />
-      <MonthBtn Month={9} />
-      <MonthBtn Month={10} />
-      <MonthBtn Month={11} />
-      <MonthBtn Month={12} />
+      {months.map((month) => (
+        <MonthBtn
+          key={month}
+          nowMonth={nowMonth}
+          setNowMonth={setNowMonth}
+          Month={month}
+        />
+      ))}
     </MonthMenus>
   );
 }

@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 export default function DefaultLayout() {
-  const fakeData = useState([]);
-
   const Wrap = styled.div`
     max-width: 100%;
     background-color: #fff;
@@ -33,7 +31,7 @@ export default function DefaultLayout() {
 
   return (
     <Wrap>
-      <Outlet fakeData={fakeData} />
+      <Outlet />
     </Wrap>
   );
 }

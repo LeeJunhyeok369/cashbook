@@ -8,10 +8,11 @@ const InputWrapper = styled.div`
 const StyledInput = styled.input`
   width: calc(100% - 20px);
   border: 0;
-  background-color: #fff;
+  background-color: #fff !important;
   height: 45px;
   padding: 0 10px;
   border-radius: 0.4rem;
+  outline: none;
 `;
 const Label = styled.label`
   line-height: 2rem;

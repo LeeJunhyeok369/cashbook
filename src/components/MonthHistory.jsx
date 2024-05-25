@@ -21,100 +21,24 @@ const HistoryWrap = styled.div`
   }
 `;
 
-export default function MonthHistory() {
+export default function MonthHistory({ fakeData, nowMonth }) {
+  const nowFakeData = fakeData
+    .filter((item) => Number(item.date.split("-")[1]) == nowMonth)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
   return (
     <HistoryWrap>
-      <MonthSummary />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
-      <History
-        id={"id"}
-        date={"2024-01-02"}
-        item={"물건"}
-        amount={"10000"}
-        description={
-          "월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0월 총 지출: 0"
-        }
-      />
+      <MonthSummary nowFakeData={nowFakeData} nowMonth={nowMonth} />
+      {nowFakeData.map((e) => (
+        <History
+          key={e.id}
+          id={e.id}
+          date={e.date}
+          item={e.item}
+          amount={e.amount}
+          description={e.description}
+        />
+      ))}
     </HistoryWrap>
   );
 }

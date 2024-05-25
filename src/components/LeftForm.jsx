@@ -21,11 +21,11 @@ const LeftStyle = styled.div`
   background-color: #d5e3ff;
 `;
 
-export default function LeftForm() {
+export default function LeftForm({ setFakeData }) {
   return (
     <LeftStyle>
       <Title>개인 지출 관리 애플리케이션</Title>
-      <InputForm />
+      <InputForm setFakeData={setFakeData} />
     </LeftStyle>
   );
 }

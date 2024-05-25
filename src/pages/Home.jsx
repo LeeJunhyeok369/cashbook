@@ -20,14 +20,12 @@ const InnerWrap = styled.div`
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 `;
 
-export default function Home({ fakeData }) {
-  console.log(fakeData);
-
+export default function Home({ fakeData, setFakeData }) {
   return (
     <InnerWrap>
       <Flex>
-        <LeftForm />
-        <RightList />
+        <LeftForm setFakeData={setFakeData} />
+        <RightList fakeData={fakeData} />
       </Flex>
     </InnerWrap>
   );
