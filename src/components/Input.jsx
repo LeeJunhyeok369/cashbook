@@ -28,11 +28,13 @@ export default function Input({
   onChange,
   placeholder,
   name,
+  forwardedRef,
 }) {
   return (
     <InputWrapper>
       {label && <Label>{label}</Label>}
       <StyledInput
+        ref={forwardedRef || undefined}
         type={type}
         value={value}
         onChange={onChange}
