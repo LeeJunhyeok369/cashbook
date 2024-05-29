@@ -66,8 +66,6 @@ export default function Detail({ data, setData }) {
   const navigate = useNavigate();
 
   const idData = data.find((item) => item.id === id);
-  console.log(data);
-  console.log(idData);
   const [formData, setFormData] = useState({
     id: idData.id,
     date: idData.date,

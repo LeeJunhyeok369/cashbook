@@ -92,8 +92,6 @@ export default function MonthSummary({ nowData, nowMonth }) {
     });
 
     setPercentageData(newPercentageColorData);
-
-    console.log(percentageData);
   }, [nowData]);
 
   return (
