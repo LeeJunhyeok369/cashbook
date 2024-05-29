@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { setLocalStorege } from "../Hooks/LocalStorage";
 import Input from "../components/Input";
+import { HistoryContext } from "../context/HistoryContext";
 
 const DetailContainer = styled.div`
   width: 500px;
@@ -61,7 +62,11 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export default function Detail({ data, setData }) {
+export default function Detail() {
+  const historyContext = useContext(HistoryContext);
+  const data = historyContext.data;
+  const setData = historyContext.setData;
+
   const { id } = useParams();
   const navigate = useNavigate();
 

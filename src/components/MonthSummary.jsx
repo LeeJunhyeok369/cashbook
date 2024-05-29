@@ -41,7 +41,6 @@ const HistortyList = styled.div`
 
 export default function MonthSummary({ nowData, nowMonth }) {
   const [percentageData, setPercentageData] = useState([]);
-  const [propsData, setPropsData] = useState([]);
 
   const percentageColor = [
     "rgb(0, 123, 255)",

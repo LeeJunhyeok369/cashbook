@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { setLocalStorege } from "../Hooks/LocalStorage";
+import { HistoryContext } from "../context/HistoryContext";
 import Input from "./Input";
 
 const Form = styled.form`
@@ -28,7 +29,11 @@ const Form = styled.form`
   }
 `;
 
-export default function InputForm({ setData, data }) {
+export default function InputForm() {
+  const historyContext = useContext(HistoryContext);
+  const data = historyContext.data;
+  const setData = historyContext.setData;
+
   const [formData, setFormData] = useState({
     id: uuidv4(),
     date: "",

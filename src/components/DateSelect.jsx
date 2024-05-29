@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { HistoryContext } from "../context/HistoryContext";
 import MonthBtn from "./MonthBtn";
 
 const MonthMenus = styled.div`
@@ -10,7 +11,11 @@ const MonthMenus = styled.div`
   flex-wrap: wrap;
 `;
 
-export default function DateSelect({ nowMonth, setNowMonth }) {
+export default function DateSelect() {
+  const historyContext = useContext(HistoryContext);
+  const nowMonth = historyContext.nowMonth;
+  const setNowMonth = historyContext.setNowMonth;
+
   const months = Array.from({ length: 12 }, (_, index) => index + 1);
 
   return (

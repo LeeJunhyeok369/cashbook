@@ -12,11 +12,11 @@ const RightStyle = styled.div`
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 `;
 
-export default function RightList({ data, nowMonth, setNowMonth }) {
+export default function RightList() {
   return (
     <RightStyle>
-      <DateSelect nowMonth={nowMonth} setNowMonth={setNowMonth} />
-      <MonthHistory data={data} nowMonth={nowMonth} />
+      <DateSelect />
+      <MonthHistory />
     </RightStyle>
   );
 }

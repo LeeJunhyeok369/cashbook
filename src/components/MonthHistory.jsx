@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import { HistoryContext } from "../context/HistoryContext";
 import History from "./History";
 import MonthSummary from "./MonthSummary";
 
@@ -21,8 +22,11 @@ const HistoryWrap = styled.div`
   }
 `;
 
-export default function MonthHistory({ data, nowMonth }) {
+export default function MonthHistory() {
   const [nowData, setNowData] = useState([]);
+  const historyContext = useContext(HistoryContext);
+  const nowMonth = historyContext.nowMonth;
+  const data = historyContext.data;
 
   useEffect(() => {
     const filteredData = data

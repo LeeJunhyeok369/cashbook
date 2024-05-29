@@ -19,17 +19,12 @@ const InnerWrap = styled.div`
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 `;
 
-export default function Home({ data, setData, nowMonth, setNowMonth }) {
+export default function Home() {
   return (
     <InnerWrap>
       <Flex>
-        <LeftForm
-          setData={setData}
-          data={data}
-          nowMonth={nowMonth}
-          setNowMonth={setNowMonth}
-        />
-        <RightList data={data} nowMonth={nowMonth} setNowMonth={setNowMonth} />
+        <LeftForm />
+        <RightList />
       </Flex>
     </InnerWrap>
   );
