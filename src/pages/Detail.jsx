@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { setLocalStorege } from "../Hooks/LocalStorage";
 import Input from "../components/Input";
-import { HistoryContext } from "../context/HistoryContext";
+import { setData as setDataAction } from "../redux/slice/historySlice";
 
 const DetailContainer = styled.div`
   width: 500px;
@@ -63,22 +64,24 @@ const Overlay = styled.div`
 `;
 
 export default function Detail() {
-  const historyContext = useContext(HistoryContext);
-  const data = historyContext.data;
-  const setData = historyContext.setData;
-
+  const data = useSelector((state) => state.history.data);
+  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
-
   const idData = data.find((item) => item.id === id);
 
-  const [formData, setFormData] = useState({
-    id: idData.id,
-    date: idData.date,
-    item: idData.item,
-    amount: idData.amount,
-    description: idData.description,
-  });
+  const [formData, setFormData] = useState(
+    idData || {
+      id: "",
+      date: "",
+      item: "",
+      amount: 0,
+      description: "",
+    }
+  );
+  const [modalMessage, setModalMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const dateRef = useRef();
   const itemRef = useRef();
@@ -88,10 +91,7 @@ export default function Detail() {
   useEffect(() => {
     setFormData(idData);
   }, [idData]);
-
-  const [modalMessage, setModalMessage] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  useEffect(() => {}, [dispatch]);
 
   const validateFormData = () => {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
@@ -104,12 +104,11 @@ export default function Detail() {
 
   const handleSave = () => {
     if (validateFormData()) {
-      setData((prevData) =>
-        prevData.map((item) =>
-          item.id === formData.id ? { ...formData } : item
-        )
+      const SaveData = data.map((item) =>
+        item.id === formData.id ? { ...formData } : item
       );
-      setLocalStorege("data", data);
+      dispatch(setDataAction(SaveData));
+      setLocalStorege("data", SaveData);
       navigate("/");
     } else {
       setModalMessage("입력된 정보가 올바르지 않습니다.");
@@ -118,9 +117,9 @@ export default function Detail() {
   };
 
   const handleDelete = () => {
-    const newData = data.filter((item) => item.id !== formData.id);
-    setData(newData);
-    setLocalStorege("data", data);
+    const DelData = data.filter((item) => item.id !== formData.id);
+    dispatch(setDataAction(DelData));
+    setLocalStorege("data", DelData);
     navigate("/");
   };
 

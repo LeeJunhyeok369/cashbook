@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { HistoryContext } from "../context/HistoryContext";
+import { setNowMonth as setNowMonthAction } from "../redux/slice/nowMonthSlice";
 import MonthBtn from "./MonthBtn";
 
 const MonthMenus = styled.div`
@@ -12,9 +13,12 @@ const MonthMenus = styled.div`
 `;
 
 export default function DateSelect() {
-  const historyContext = useContext(HistoryContext);
-  const nowMonth = historyContext.nowMonth;
-  const setNowMonth = historyContext.setNowMonth;
+  const nowMonth = useSelector((state) => state.nowMonth.nowMonth);
+  const dispatch = useDispatch();
+
+  const setNowMonth = (month) => {
+    dispatch(setNowMonthAction(month));
+  };
 
   const months = Array.from({ length: 12 }, (_, index) => index + 1);
 

@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { setLocalStorege } from "../Hooks/LocalStorage";
-import { HistoryContext } from "../context/HistoryContext";
+import { setData as setDataAction } from "../redux/slice/historySlice";
 import Input from "./Input";
 
 const Form = styled.form`
@@ -11,7 +12,6 @@ const Form = styled.form`
   justify-content: center;
   flex-direction: column;
   padding: 0 10%;
-  /* margin-top: 2rem; */
 
   > button#save {
     width: 100%;
@@ -30,9 +30,8 @@ const Form = styled.form`
 `;
 
 export default function InputForm() {
-  const historyContext = useContext(HistoryContext);
-  const data = historyContext.data;
-  const setData = historyContext.setData;
+  const data = useSelector((state) => state.history.data);
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     id: uuidv4(),
@@ -53,8 +52,8 @@ export default function InputForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setData((prev) => [...prev, formData]);
-    setLocalStorege("data", data);
+    dispatch(setDataAction([...data, formData]));
+    setLocalStorege("data", [...data, formData]);
     setFormData({
       id: uuidv4(),
       date: "",
@@ -74,6 +73,7 @@ export default function InputForm() {
   };
 
   useEffect(() => {
+    // formData의 변화를 감지하여 isFormValid 상태 업데이트
     setIsFormValid(validateForm());
   }, [formData]);
 
