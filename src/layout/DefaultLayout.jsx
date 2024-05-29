@@ -37,19 +37,17 @@ export default function DefaultLayout() {
   useEffect(() => {
     // 로컬 스토리지에서 데이터 불러오기
     const savedData = getLocalStorege("data");
-    if (savedData !== undefined) {
+    if (savedData) {
       // 로컬 스토리지에 저장된 데이터가 있을 경우 Redux store에 데이터 설정
       dispatch(setDataAction(savedData));
-      console.log(savedData);
     } else {
       // 로컬 스토리지에 저장된 데이터가 없을 경우 현재 데이터를 로컬 스토리지에 저장
       localStorage.setItem("data", JSON.stringify(data));
-      console.log("ww");
     }
   }, []);
 
   // useEffect(() => {
-  //   setLocalStorege("data", data);
+
   // }, [data]);
 
   return (
