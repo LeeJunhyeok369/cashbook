@@ -29,12 +29,11 @@ export default function MonthHistory() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // 현재 월에 해당하는 데이터 필터링
     const filteredData = data
       .filter((item) => Number(item.date.split("-")[1]) === nowMonth)
       .sort((a, b) => new Date(a.date) - new Date(b.date));
     setNowData(filteredData);
-  }, [data, nowMonth]); // 데이터 또는 현재 월이 변경될 때마다 재렌더링
+  }, [data, nowMonth]);
 
   return (
     <HistoryWrap>

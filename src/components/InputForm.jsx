@@ -73,7 +73,6 @@ export default function InputForm() {
   };
 
   useEffect(() => {
-    // formData의 변화를 감지하여 isFormValid 상태 업데이트
     setIsFormValid(validateForm());
   }, [formData]);
 
@@ -92,7 +91,7 @@ export default function InputForm() {
         onChange={handleChange}
         placeholder="지출 항목"
         name="item"
-        maxLength={50} // 최대 글자수 제한
+        maxLength={50}
       />
       <Input
         label="금액"
@@ -108,7 +107,7 @@ export default function InputForm() {
         onChange={handleChange}
         placeholder="지출 내용"
         name="description"
-        maxLength={100} // 최대 글자수 제한
+        maxLength={100}
       />
       <button id="save" type="submit" disabled={!isFormValid}>
         저장
