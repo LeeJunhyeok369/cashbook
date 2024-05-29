@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import DateSelect from "./DateSelect";
 import MonthHistory from "./MonthHistory";
@@ -8,14 +8,15 @@ const RightStyle = styled.div`
   height: 100%;
   background-color: #f7f7f9;
   overflow: hidden;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 `;
 
-export default function RightList({ fakeData }) {
-  const [nowMonth, setNowMonth] = useState(2);
+export default function RightList({ data, nowMonth, setNowMonth }) {
   return (
     <RightStyle>
       <DateSelect nowMonth={nowMonth} setNowMonth={setNowMonth} />
-      <MonthHistory fakeData={fakeData} nowMonth={nowMonth} />
+      <MonthHistory data={data} nowMonth={nowMonth} />
     </RightStyle>
   );
 }

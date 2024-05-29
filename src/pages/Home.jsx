@@ -15,17 +15,21 @@ const InnerWrap = styled.div`
   height: 85%;
   min-height: 700px;
   background-color: #fff;
-  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 `;
 
-export default function Home({ fakeData, setFakeData }) {
+export default function Home({ data, setData, nowMonth, setNowMonth }) {
   return (
     <InnerWrap>
       <Flex>
-        <LeftForm setFakeData={setFakeData} />
-        <RightList fakeData={fakeData} />
+        <LeftForm
+          setData={setData}
+          data={data}
+          nowMonth={nowMonth}
+          setNowMonth={setNowMonth}
+        />
+        <RightList data={data} nowMonth={nowMonth} setNowMonth={setNowMonth} />
       </Flex>
     </InnerWrap>
   );

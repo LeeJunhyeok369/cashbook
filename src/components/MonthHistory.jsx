@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import History from "./History";
 import MonthSummary from "./MonthSummary";
@@ -21,15 +21,20 @@ const HistoryWrap = styled.div`
   }
 `;
 
-export default function MonthHistory({ fakeData, nowMonth }) {
-  const nowFakeData = fakeData
-    .filter((item) => Number(item.date.split("-")[1]) == nowMonth)
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
+export default function MonthHistory({ data, nowMonth }) {
+  const [nowData, setNowData] = useState([]);
+
+  useEffect(() => {
+    const filteredData = data
+      .filter((item) => Number(item.date.split("-")[1]) === nowMonth)
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+    setNowData(filteredData);
+  }, [data, nowMonth]);
 
   return (
     <HistoryWrap>
-      <MonthSummary nowFakeData={nowFakeData} nowMonth={nowMonth} />
-      {nowFakeData.map((e) => (
+      <MonthSummary nowData={nowData} nowMonth={nowMonth} />
+      {nowData.map((e) => (
         <History
           key={e.id}
           id={e.id}

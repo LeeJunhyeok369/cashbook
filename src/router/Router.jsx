@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { getLocalStorege, setLocalStorege } from "../Hooks/LocalStorage";
 import DefaultLayout from "../layout/DefaultLayout";
 import Detail from "../pages/Detail";
 import Home from "../pages/Home";
 
 export default function Router() {
-  const [fakeData, setFakeData] = useState([
+  const [data, setData] = useState([
     {
       id: "25600f72-56b4-41a7-a9c2-47358580e2f8",
       date: "2024-01-05",
@@ -58,17 +59,35 @@ export default function Router() {
     },
   ]);
 
+  const [nowMonth, setNowMonth] = useState(1);
+
+  useEffect(() => {
+    let getData = getLocalStorege("data");
+    if (getData) {
+      setData(getData);
+    } else {
+      setLocalStorege("data", data);
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<DefaultLayout />}>
           <Route
             path="/"
-            element={<Home fakeData={fakeData} setFakeData={setFakeData} />}
+            element={
+              <Home
+                data={data}
+                nowMonth={nowMonth}
+                setNowMonth={setNowMonth}
+                setData={setData}
+              />
+            }
           />
           <Route
             path="/detail/:id"
-            element={<Detail fakeData={fakeData} setFakeData={setFakeData} />}
+            element={<Detail data={data} setData={setData} />}
           />
         </Route>
       </Routes>

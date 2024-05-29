@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
+import { setLocalStorege } from "../Hooks/LocalStorage";
 import Input from "./Input";
 
 const Form = styled.form`
@@ -16,37 +17,63 @@ const Form = styled.form`
     text-align: center;
     height: 50px;
     line-height: 50px;
-    background-color: #5383e8;
+    background-color: ${({ isFormValid }) =>
+      isFormValid ? "#5383e8" : "#ccc"};
     color: #fff;
     border: 0;
     border-radius: 1rem;
     margin-top: 1rem;
     font-size: 1.05rem;
+    cursor: ${({ isFormValid }) => (isFormValid ? "pointer" : "not-allowed")};
   }
 `;
 
-export default function InputForm({ setFakeData }) {
+export default function InputForm({ setData, data }) {
   const [formData, setFormData] = useState({
     id: uuidv4(),
     date: "",
     item: "",
-    amount: "",
+    amount: 0,
     description: "",
   });
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target, value);
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "amount" ? Number(value) : value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFakeData((prev) => [...prev, formData]);
+    setData((prev) => [...prev, formData]);
+    setLocalStorege("data", data);
+    setFormData({
+      id: uuidv4(),
+      date: "",
+      item: "",
+      amount: 0,
+      description: "",
+    });
   };
 
+  const validateForm = () => {
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    const isDateValid = datePattern.test(formData.date);
+    const isItemValid = formData.item.length > 0 && formData.item.length <= 50;
+    const isDescriptionValid =
+      formData.description.length > 0 && formData.description.length <= 100;
+    return isDateValid && isItemValid && isDescriptionValid;
+  };
+
+  useEffect(() => {
+    setIsFormValid(validateForm());
+  }, [formData]);
+
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} isFormValid={isFormValid}>
       <Input
         label="날짜"
         value={formData.date}
@@ -60,6 +87,7 @@ export default function InputForm({ setFakeData }) {
         onChange={handleChange}
         placeholder="지출 항목"
         name="item"
+        maxLength={50} // 최대 글자수 제한
       />
       <Input
         label="금액"
@@ -75,8 +103,9 @@ export default function InputForm({ setFakeData }) {
         onChange={handleChange}
         placeholder="지출 내용"
         name="description"
+        maxLength={100} // 최대 글자수 제한
       />
-      <button id="save" type="submit">
+      <button id="save" type="submit" disabled={!isFormValid}>
         저장
       </button>
     </Form>

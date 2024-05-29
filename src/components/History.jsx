@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const StyleHistory = styled.div`
+const StyleHistory = styled(Link)`
   width: 94%;
   background-color: #ffffff;
   height: 100px;
@@ -14,6 +15,7 @@ const StyleHistory = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
   color: #5383e8;
+  text-decoration: none;
 
   > div {
     width: 80%;
@@ -38,7 +40,7 @@ export default function History({ id, date, item, amount, description }) {
   const dateArr = date.split("-");
 
   return (
-    <StyleHistory id={id}>
+    <StyleHistory to={"/detail/" + id} id={id}>
       <div>
         <span>
           {dateArr[0]}년 {dateArr[1]}월 {dateArr[2]}일
