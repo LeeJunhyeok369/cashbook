@@ -66,10 +66,7 @@ export default function Detail({ data, setData }) {
   const navigate = useNavigate();
 
   const idData = data.find((item) => item.id === id);
-<<<<<<< HEAD
-=======
 
->>>>>>> c94b4107f6755bb6db285edbda65d0d6ade16e92
   const [formData, setFormData] = useState({
     id: idData.id,
     date: idData.date,
@@ -127,21 +124,21 @@ export default function Detail({ data, setData }) {
       <form onSubmit={(e) => e.preventDefault()}>
         <Input
           forwardedRef={dateRef}
-          label="Date"
+          label="날짜"
           type="text"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
         />
         <Input
           forwardedRef={itemRef}
-          label="Item"
+          label="항목"
           type="text"
           value={formData.item}
           onChange={(e) => setFormData({ ...formData, item: e.target.value })}
         />
         <Input
           forwardedRef={amountRef}
-          label="Amount"
+          label="금액"
           type="number"
           value={formData.amount}
           onChange={(e) =>
@@ -150,7 +147,7 @@ export default function Detail({ data, setData }) {
         />
         <Input
           forwardedRef={descriptionRef}
-          label="Description"
+          label="내용"
           type="text"
           value={formData.description}
           onChange={(e) =>
