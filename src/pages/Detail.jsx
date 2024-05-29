@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { setLocalStorege } from "../Hooks/LocalStorage";
@@ -66,6 +66,10 @@ export default function Detail({ data, setData }) {
   const navigate = useNavigate();
 
   const idData = data.find((item) => item.id === id);
+<<<<<<< HEAD
+=======
+
+>>>>>>> c94b4107f6755bb6db285edbda65d0d6ade16e92
   const [formData, setFormData] = useState({
     id: idData.id,
     date: idData.date,
@@ -73,6 +77,11 @@ export default function Detail({ data, setData }) {
     amount: idData.amount,
     description: idData.description,
   });
+
+  const dateRef = useRef();
+  const itemRef = useRef();
+  const amountRef = useRef();
+  const descriptionRef = useRef();
 
   useEffect(() => {
     setFormData(idData);
@@ -117,18 +126,21 @@ export default function Detail({ data, setData }) {
     <DetailContainer>
       <form onSubmit={(e) => e.preventDefault()}>
         <Input
+          forwardedRef={dateRef}
           label="Date"
           type="text"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
         />
         <Input
+          forwardedRef={itemRef}
           label="Item"
           type="text"
           value={formData.item}
           onChange={(e) => setFormData({ ...formData, item: e.target.value })}
         />
         <Input
+          forwardedRef={amountRef}
           label="Amount"
           type="number"
           value={formData.amount}
@@ -137,6 +149,7 @@ export default function Detail({ data, setData }) {
           }
         />
         <Input
+          forwardedRef={descriptionRef}
           label="Description"
           type="text"
           value={formData.description}
